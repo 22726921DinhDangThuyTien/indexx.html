@@ -8,6 +8,8 @@
 	<link rel="stylesheet" href="vendor/bootstrap/css/bootstrap.min.css">
 	<link rel="stylesheet" href="vendor/fontawesome/css/all.min.css">
 	<link rel="stylesheet" href="css/style.css">
+	
+	
 
 
 </head>
@@ -45,7 +47,11 @@
                     </div>
                     <div class="form-group">
                         <label for="signupPassword">Mật khẩu</label>
-                        <input type="password" class="form-control" id="signupPassword" placeholder="Nhập mật khẩu" required>
+                        <input type="password" class="form-control" id="signupPassword" placeholder="Nhập mật khẩu" required minlength="6">
+                    </div>
+                    <div class="form-group">
+                        <label for="signupConfirmPassword">Nhập lại mật khẩu</label>
+                        <input type="password" class="form-control" id="signupConfirmPassword" placeholder="Nhập lại mật khẩu" required>
                     </div>
                     <button type="submit" class="btn btn-primary">Đăng Ký</button>
                 </form>
@@ -53,6 +59,7 @@
         </div>
     </div>
 </div>
+
 
 <!-- Modal Đăng Nhập -->
 <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel" aria-hidden="true">
@@ -74,25 +81,12 @@
                         <label for="loginPassword">Mật khẩu</label>
                         <input type="password" class="form-control" id="loginPassword" placeholder="Nhập mật khẩu" required>
                     </div>
+					<div class="form-group">
+                        <label for="loginPassword"> Mật khẩu</label>
+                        <input type="password" class="form-control" id="loginPassword" placeholder="Nhập Lại mật khẩu" required>
+                    </div>
                     <button type="submit" class="btn btn-primary">Đăng Nhập</button>
                 </form>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Modal Giỏ Hàng (Thêm nếu cần) -->
-<div class="modal fade" id="cartModal" tabindex="-1" role="dialog" aria-labelledby="cartModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="cartModalLabel">Giỏ Hàng</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <p>Giỏ hàng của bạn hiện chưa có sản phẩm.</p>
             </div>
         </div>
     </div>
@@ -117,6 +111,8 @@
         </div>
     </div>
 </div>
+
+
 
 	<header>
 		<nav class="navbar navbar-expand-md navbar-light">
@@ -427,10 +423,15 @@
 						<div class="text-right">
 							<strong>Tổng cộng:</strong> <span id="cart-total">0</span> đ
 						</div>
+						<button class="btn btn-primary" id="payButton">Thanh Toán</button>
 					</div>
 				</div>
 			</div>
 		</div>
+
+		
+
+		
 
 		
 	
@@ -443,15 +444,37 @@
 		
 		<script>
 
-document.getElementById('signupForm').addEventListener('submit', function(event) {
+			
+ document.getElementById('signupForm').addEventListener('submit', function(event) {
     event.preventDefault(); // Ngừng hành động mặc định của form (gửi form)
 
-    // Thực hiện logic đăng ký ở đây (kiểm tra dữ liệu, gọi API, v.v.)
+    // Lấy giá trị từ các trường form
+    var password = document.getElementById('signupPassword').value;
+    var confirmPassword = document.getElementById('signupConfirmPassword').value;
 
-    // Hiển thị modal thông báo thành công
-    document.getElementById('successMessage').textContent = "Bạn đã đăng ký thành công!";
-    $('#successModal').modal('show');
+    // Kiểm tra nếu mật khẩu và xác nhận mật khẩu khớp
+    if (password !== confirmPassword) {
+        alert("Mật khẩu và Mật khẩu xác nhận không khớp!");
+        return;
+    }
+
+    // Kiểm tra nếu form hợp lệ (tất cả các trường đã được điền)
+    if (this.checkValidity()) {
+        // Thực hiện logic đăng ký ở đây (kiểm tra dữ liệu, gọi API, v.v.)
+
+        // Hiển thị modal thông báo thành công
+        document.getElementById('successMessage').textContent = "Bạn đã đăng ký thành công!";
+        $('#successModal').modal('show'); // Hiển thị modal thông báo
+
+        // Tự động đóng modal sau 3 giây
+        setTimeout(function() {
+            $('#successModal').modal('hide'); // Đóng modal sau 3 giây
+        }, 3000);
+    }
 });
+
+
+// Đăng nhập
 document.getElementById('loginForm').addEventListener('submit', function(event) {
     event.preventDefault(); // Ngừng hành động mặc định của form (gửi form)
 
@@ -459,8 +482,18 @@ document.getElementById('loginForm').addEventListener('submit', function(event) 
 
     // Hiển thị modal thông báo thành công
     document.getElementById('successMessage').textContent = "Đăng nhập thành công!";
-    $('#successModal').modal('show');
+    $('#successModal').modal('show');  // Hiển thị modal
+
+    // Tự động đóng modal sau 3 giây
+    setTimeout(function() {
+        $('#successModal').modal('hide');  // Đóng modal sau 3 giây
+    }, 3000);  // Thời gian tự động đóng (3000ms = 3 giây)
 });
+
+
+
+
+
 
 			
 
@@ -501,7 +534,33 @@ document.getElementById('loginForm').addEventListener('submit', function(event) 
 				});
 			});
 
-			
+		
+     // Xử lý thanh toán
+    document.getElementById('payButton').addEventListener('click', function() {
+        if (cart.length === 0) {
+            alert("Giỏ hàng của bạn trống. Vui lòng thêm sản phẩm vào giỏ hàng.");
+            return;
+        }
+
+        // Tính tổng tiền
+        let totalAmount = 0;
+        cart.forEach(item => {
+            totalAmount += item.price * item.quantity;
+        });
+
+        // Hiển thị thông báo thanh toán thành công
+        Swal.fire({
+            title: 'Thanh toán thành công!',
+            text: `Tổng cộng: ${totalAmount.toLocaleString()} đ`,
+            icon: 'success',
+            confirmButtonText: 'OK'
+        }).then(() => {
+            // Sau khi thanh toán, xóa giỏ hàng
+            cart = [];
+            updateCart(); // Cập nhật giỏ hàng sau khi thanh toán
+            $('#cartModal').modal('hide'); // Đóng modal
+        });
+    });
 		</script>
 
 	
@@ -670,5 +729,6 @@ document.getElementById('loginForm').addEventListener('submit', function(event) 
 	<script src="vendor/popper.min.js"></script>
 	<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
 	<script src="js/script.js"></script>
+	
 </body>
 </html>

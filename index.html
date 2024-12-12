@@ -9,74 +9,114 @@
 	<link rel="stylesheet" href="vendor/fontawesome/css/all.min.css">
 	<link rel="stylesheet" href="css/style.css">
 
+
 </head>
 <body>
-	<div class="top-bar">
-		<div class="container-fluid">
-			<button class="btn btn-light" data-toggle="modal" data-target="#signupModal">Đăng Ký</button>
-                <button class="btn btn-light" data-toggle="modal" data-target="#loginModal">Đăng Nhập</button>
-                <button class="btn btn-light" data-toggle="modal" data-target="#cartModal"><i class="fas fa-shopping-cart"></i> Giỏ Hàng</button>
-	
-		</div>
-	</div>
+<!-- Thanh Điều Hướng -->
+<div class="top-bar">
+    <div class="container-fluid">
+        <button class="btn btn-light" data-toggle="modal" data-target="#signupModal">Đăng Ký</button>
+        <button class="btn btn-light" data-toggle="modal" data-target="#loginModal">Đăng Nhập</button>
+        <button class="btn btn-light" data-toggle="modal" data-target="#cartModal">
+            <i class="fas fa-shopping-cart"></i> Giỏ Hàng
+        </button>
+    </div>
+</div>
 
-	<!-- Modal Đăng Ký -->
-	<div class="modal fade" id="signupModal" tabindex="-1" role="dialog" aria-labelledby="signupModalLabel" aria-hidden="true">
-		<div class="modal-dialog" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h5 class="modal-title" id="signupModalLabel">Đăng Ký</h5>
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-				</div>
-				<div class="modal-body">
-					<form>
-						<div class="form-group">
-							<label for="signupName">Tên đầy đủ</label>
-							<input type="text" class="form-control" id="signupName" placeholder="Nhập tên của bạn">
-						</div>
-						<div class="form-group">
-							<label for="signupEmail">Email</label>
-							<input type="email" class="form-control" id="signupEmail" placeholder="Nhập email">
-						</div>
-						<div class="form-group">
-							<label for="signupPassword">Mật khẩu</label>
-							<input type="password" class="form-control" id="signupPassword" placeholder="Nhập mật khẩu">
-						</div>
-						<button type="submit" class="btn btn-primary">Đăng Ký</button>
-					</form>
-				</div>
-			</div>
-		</div>
-	</div>
+<!-- Modal Đăng Ký -->
+<div class="modal fade" id="signupModal" tabindex="-1" role="dialog" aria-labelledby="signupModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="signupModalLabel">Đăng Ký</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="signupForm">
+                    <div class="form-group">
+                        <label for="signupName">Tên đầy đủ</label>
+                        <input type="text" class="form-control" id="signupName" placeholder="Nhập tên của bạn" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="signupEmail">Email</label>
+                        <input type="email" class="form-control" id="signupEmail" placeholder="Nhập email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="signupPassword">Mật khẩu</label>
+                        <input type="password" class="form-control" id="signupPassword" placeholder="Nhập mật khẩu" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Đăng Ký</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 
-	<!-- Modal Đăng Nhập -->
-	<div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel" aria-hidden="true">
-		<div class="modal-dialog" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h5 class="modal-title" id="loginModalLabel">Đăng Nhập</h5>
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-				</div>
-				<div class="modal-body">
-					<form>
-						<div class="form-group">
-							<label for="loginEmail">Email</label>
-							<input type="email" class="form-control" id="loginEmail" placeholder="Nhập email">
-						</div>
-						<div class="form-group">
-							<label for="loginPassword">Mật khẩu</label>
-							<input type="password" class="form-control" id="loginPassword" placeholder="Nhập mật khẩu">
-						</div>
-						<button type="submit" class="btn btn-primary">Đăng Nhập</button>
-					</form>
-				</div>
-			</div>
-		</div>
-	</div>
+<!-- Modal Đăng Nhập -->
+<div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="loginModalLabel">Đăng Nhập</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="loginForm">
+                    <div class="form-group">
+                        <label for="loginEmail">Email</label>
+                        <input type="email" class="form-control" id="loginEmail" placeholder="Nhập email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="loginPassword">Mật khẩu</label>
+                        <input type="password" class="form-control" id="loginPassword" placeholder="Nhập mật khẩu" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Đăng Nhập</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Giỏ Hàng (Thêm nếu cần) -->
+<div class="modal fade" id="cartModal" tabindex="-1" role="dialog" aria-labelledby="cartModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="cartModalLabel">Giỏ Hàng</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Giỏ hàng của bạn hiện chưa có sản phẩm.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Thông Báo Thành Công -->
+<div class="modal fade" id="successModal" tabindex="-1" role="dialog" aria-labelledby="successModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="successModalLabel">Thành Công</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p id="successMessage">Bạn đã đăng ký thành công!</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Đóng</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 	<header>
 		<nav class="navbar navbar-expand-md navbar-light">
@@ -391,12 +431,39 @@
 				</div>
 			</div>
 		</div>
+
+		
 	
 		<!-- Scripts -->
 		<script src="vendor/jquery-3.6.0.min.js"></script>
 		<script src="vendor/popper.min.js"></script>
 		<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+
+
+		
 		<script>
+
+document.getElementById('signupForm').addEventListener('submit', function(event) {
+    event.preventDefault(); // Ngừng hành động mặc định của form (gửi form)
+
+    // Thực hiện logic đăng ký ở đây (kiểm tra dữ liệu, gọi API, v.v.)
+
+    // Hiển thị modal thông báo thành công
+    document.getElementById('successMessage').textContent = "Bạn đã đăng ký thành công!";
+    $('#successModal').modal('show');
+});
+document.getElementById('loginForm').addEventListener('submit', function(event) {
+    event.preventDefault(); // Ngừng hành động mặc định của form (gửi form)
+
+    // Thực hiện logic đăng nhập ở đây (kiểm tra dữ liệu, gọi API, v.v.)
+
+    // Hiển thị modal thông báo thành công
+    document.getElementById('successMessage').textContent = "Đăng nhập thành công!";
+    $('#successModal').modal('show');
+});
+
+			
+
 			let cart = [];
 			function addToCart(name, price) {
 				const existing = cart.find(item => item.name === name);
@@ -433,7 +500,11 @@
 					addToCart(name, price);
 				});
 			});
+
+			
 		</script>
+
+	
 
 		<!-- ABOUT -->
 		<section id="about">
